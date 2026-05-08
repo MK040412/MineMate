@@ -1,4 +1,4 @@
-# MineMate: Emergent Behaviour in Multi-Agent Systems with Human
+# MineMate: Multi-Agent Emergence with Humans
 
 Sub-project under [Project Weasel](https://github.com/MK040412/Project-Weasel).
 
