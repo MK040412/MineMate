@@ -10,34 +10,134 @@ const authors = [
 const links = [
 	{ label: 'Project Weasel', href: 'https://mk040412.github.io/Project-Weasel/' },
 ]
+
+// Qualitative scenario clips (lossless renders compressed for the web).
+const clip = (name) => `${base}/clips/${name}.mp4`
+
+// Scenario groups, ordered as a story: what works → coordination →
+// human-in-the-loop → and why the framework is needed (failure cases).
+const works = [
+	{ src: 'different_tasks', label: 'Eight agents split into different jobs and work in parallel.' },
+	{ src: 'log_gathering_a', label: 'Chopping logs to stock shared materials.' },
+	{ src: 'log_gathering_b', label: 'Gathering keeps the supply chain moving.' },
+]
+const failures = [
+	{ src: 'farming_stuck_farm', label: 'Without the framework: the farm task stalls and never completes.' },
+	{ src: 'farming_stuck_resource', label: 'Without the framework: the agent cannot recover from a missing resource.' },
+]
 ---
 
 <Layout
 	title='MineMate: Multi-Agent Emergent Capability with Humans'
 	pageTitle='MineMate'
-	description='Sub-project of Project Weasel — studying multi-agent emergence with humans in the loop.'
+	description='Sub-project of Project Weasel — emergent multi-agent capability with humans in the loop, in the open-ended world of Minecraft.'
 	authors={authors}
 	links={links}
-	hero={`${base}/minemate.png`}
-	heroAlt='MineMate hero image'
+	heroVideo={clip('open_ended')}
+	heroAlt='An open-ended Minecraft world'
 	faviconHref={`${base}/minemate.png`}
 >
 	<h1>Overview</h1>
 	<ul>
-		<li><b>MineMate</b> is a sub-project of <a href='https://mk040412.github.io/Project-Weasel/'>Project Weasel</a>.</li>
-		<li>Coming soon.</li>
+		<li><b>MineMate</b> is a sub-project of <a href='https://mk040412.github.io/Project-Weasel/'>Project Weasel</a>: an <b>8-agent Minecraft village</b> where LLM agents — and a human — cooperate to build, farm, and gather together.</li>
+		<li>We study whether useful capability can <b>emerge</b> from many language-model agents acting in a shared world, and how a coordination framework plus a human-in-the-loop make that emergence reliable.</li>
 	</ul>
 
-	<h1>Method</h1>
-	<p class='muted'>Coming soon.</p>
+	<h1>Why Minecraft?</h1>
+	<p>
+		Minecraft is an <b>open-ended, partially-observable sandbox</b>: there is no fixed objective, each
+		agent only sees its local surroundings, and goals must be discovered rather than scripted. That makes
+		it a strong testbed for <b>multi-agent emergence</b> — capability has to arise from the agents'
+		interaction with the world and with each other, not from hand-written rules. The clip above is the
+		raw world the agents wake up into.
+	</p>
 
-	<h1>Results</h1>
-	<p class='muted'>Coming soon.</p>
+	<h1>What the agents do well</h1>
+	<p>
+		Given a concrete sub-task, each agent performs reliably. The eight agents naturally <b>divide labor</b>
+		— logging, mining, and crafting tools — and run those jobs in parallel without colliding.
+	</p>
+	<div class='clip-grid'>
+		{works.map((c) => (
+			<figure class='clip'>
+				<video src={clip(c.src)} autoplay loop muted playsinline preload='metadata'></video>
+				<figcaption>{c.label}</figcaption>
+			</figure>
+		))}
+	</div>
+
+	<h1>Agents coordinate to share resources</h1>
+	<p>
+		Capability is not just per-agent — it is <b>social</b>. Agents communicate over shared channels to
+		request and hand off items. Here an agent needs a crafting table; it asks <b>Nova</b>, and Nova
+		brings one over. The exchange emerges from their dialogue, not from a hard-coded trade.
+	</p>
+	<figure class='clip clip-wide'>
+		<video src={clip('nova_communication')} autoplay loop muted playsinline preload='metadata'></video>
+		<figcaption>An agent asks Nova for a crafting table — and Nova delivers it.</figcaption>
+	</figure>
+
+	<h1>Humans and agents team up</h1>
+	<p>
+		With a <b>human in the loop</b>, the agents take direction and contribute to larger projects. This
+		building session shows that human–agent teaming is workable: the human sets intent, and the agents
+		help realize it together.
+	</p>
+	<figure class='clip clip-wide'>
+		<video src={clip('human_agent_building')} autoplay loop muted playsinline preload='metadata'></video>
+		<figcaption>Human and agents building together.</figcaption>
+	</figure>
+
+	<h1>Why the framework matters</h1>
+	<p>
+		Our contribution is the <b>coordination framework</b>. Remove it and the <i>same</i> model gets
+		<b>stuck</b>: it talks instead of acting, loops on a sub-goal, or cannot recover from a missing
+		resource. The two farming attempts below fail exactly where the framework would have kept the team
+		unblocked — motivating why the structure is needed.
+	</p>
+	<div class='clip-grid'>
+		{failures.map((c) => (
+			<figure class='clip'>
+				<video src={clip(c.src)} autoplay loop muted playsinline preload='metadata'></video>
+				<figcaption>{c.label}</figcaption>
+			</figure>
+		))}
+	</div>
 
 	<hr />
 	<h1>Acknowledgement</h1>
 	<p>
 		Part of <a href='https://mk040412.github.io/Project-Weasel/'>Project Weasel</a>, maintained by{' '}
-		<a href='https://mk040412.github.io/'>Kang Minkyu</a>.
+		<a href='https://mk040412.github.io/'>Kang Minkyu</a>. Built on the mindcraft agent framework and
+		PaperMC, with inference served from Google Vertex AI.
 	</p>
 </Layout>
+
+<style>
+	.clip-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 16px;
+		margin: 16px 0 8px;
+	}
+	.clip {
+		margin: 0;
+	}
+	.clip video {
+		width: 100%;
+		height: auto;
+		display: block;
+		border-radius: 6px;
+		background: #000;
+	}
+	.clip figcaption {
+		color: var(--muted);
+		font-size: 14px;
+		margin-top: 6px;
+		line-height: 1.4;
+	}
+	.clip-wide {
+		max-width: 800px;
+		margin: 16px auto 8px;
+	}
+</style>
