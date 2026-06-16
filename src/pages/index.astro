@@ -9,6 +9,7 @@ const authors = [
 
 const links = [
 	{ label: 'Project Weasel', href: 'https://mk040412.github.io/Project-Weasel/' },
+	{ label: 'Project Slide', href: 'https://docs.google.com/presentation/d/1j5RRUXX4L8SYnvOt--nQJJUP3YI-ml_C6bIDvD-2vtI/edit?usp=sharing' },
 ]
 
 // Qualitative scenario clips (lossless renders compressed for the web).
@@ -45,16 +46,6 @@ const failures = [
 		<li><b>MineMate</b> is a sub-project of <a href='https://mk040412.github.io/Project-Weasel/'>Project Weasel</a>: a study of <b>what phenomena emerge when multiple humans and LLM agents cooperate</b> — building, farming, and gathering together — in a shared, open-ended Minecraft world.</li>
 		<li>I study whether useful capability can <b>emerge</b> from many language-model agents acting in a shared world, and how a coordination framework plus a human-in-the-loop make that emergence reliable.</li>
 	</ul>
-
-	<h1>Project slides</h1>
-	<p class='muted'>A full walkthrough of the project.{' '}
-		<a href='https://docs.google.com/presentation/d/1j5RRUXX4L8SYnvOt--nQJJUP3YI-ml_C6bIDvD-2vtI/edit?usp=sharing'
-			target='_blank' rel='noopener'>Open in Google Slides ↗</a></p>
-	<div class='slides-embed'>
-		<iframe
-			src='https://docs.google.com/presentation/d/1j5RRUXX4L8SYnvOt--nQJJUP3YI-ml_C6bIDvD-2vtI/embed?start=false&loop=false&delayms=5000'
-			title='MineMate project slides' allowfullscreen loading='lazy'></iframe>
-	</div>
 
 	<h1>Why Minecraft?</h1>
 	<p>
@@ -340,25 +331,6 @@ const failures = [
 		font-size: 15px;
 		line-height: 1.6;
 	}
-	/* Responsive 16:9 Google Slides embed */
-	.slides-embed {
-		position: relative;
-		width: 100%;
-		padding-top: 56.25%;
-		margin: 14px 0 8px;
-		border-radius: 8px;
-		overflow: hidden;
-		border: 1px solid var(--border);
-		background: #000;
-	}
-	.slides-embed iframe {
-		position: absolute;
-		inset: 0;
-		width: 100%;
-		height: 100%;
-		border: 0;
-	}
-
 	/* Click the design-space / Slack figure to enlarge */
 	.fig-wide img {
 		cursor: zoom-in;
