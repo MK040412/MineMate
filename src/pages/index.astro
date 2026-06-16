@@ -42,7 +42,7 @@ const failures = [
 >
 	<h1>Overview</h1>
 	<ul>
-		<li><b>MineMate</b> is a sub-project of <a href='https://mk040412.github.io/Project-Weasel/'>Project Weasel</a>: an <b>8-agent Minecraft village</b> where LLM agents — and a human — cooperate to build, farm, and gather together.</li>
+		<li><b>MineMate</b> is a sub-project of <a href='https://mk040412.github.io/Project-Weasel/'>Project Weasel</a>: a study of <b>what phenomena emerge when multiple humans and LLM agents cooperate</b> — building, farming, and gathering together — in a shared, open-ended Minecraft world.</li>
 		<li>We study whether useful capability can <b>emerge</b> from many language-model agents acting in a shared world, and how a coordination framework plus a human-in-the-loop make that emergence reliable.</li>
 	</ul>
 
@@ -144,6 +144,16 @@ const failures = [
 			structures), <b>observability</b> (partial in-game vs. full in text), and
 			<b>user–model interaction</b> (direct, hierarchical, decentralized talking systems).
 			Each cell is measured for efficiency and interaction preference.
+		</figcaption>
+	</figure>
+
+	<figure class='chart-fig'>
+		<img loading='lazy' src={fig('marginal_utility')} alt='Task completion time vs. number of agents managed by one user' />
+		<figcaption>
+			<b>The coordination limit.</b> As a single user manages more agents, task-completion
+			time drops steeply at first but with <b>diminishing marginal utility</b> — each added
+			agent helps less, approaching a floor set by how many one person can actually coordinate.
+			<span class='muted'>(Illustrative; to be quantified in the planned study.)</span>
 		</figcaption>
 	</figure>
 
@@ -330,8 +340,29 @@ const failures = [
 		font-size: 15px;
 		line-height: 1.6;
 	}
-	/* Click the design-space / Slack figure to enlarge */
-	.fig-wide img {
+	/* Centered chart figure (paper-style) */
+	.chart-fig {
+		max-width: 640px;
+		margin: 18px auto 8px;
+	}
+	.chart-fig img {
+		width: 100%;
+		height: auto;
+		display: block;
+		border-radius: 8px;
+		border: 1px solid var(--border);
+		background: #fff;
+	}
+	.chart-fig figcaption {
+		color: var(--muted);
+		font-size: 14px;
+		margin-top: 8px;
+		line-height: 1.5;
+		text-align: center;
+	}
+	/* Click the design-space / chart / Slack figure to enlarge */
+	.fig-wide img,
+	.chart-fig img {
 		cursor: zoom-in;
 		transition: transform 0.12s ease;
 	}
@@ -382,7 +413,7 @@ const failures = [
 		document.querySelectorAll('.clip video, .cmpcard video').forEach((v) => {
 			v.addEventListener('click', () => openVid(v.getAttribute('src') || ''))
 		})
-		document.querySelectorAll('.fig-wide img, .slack-img').forEach((im) => {
+		document.querySelectorAll('.fig-wide img, .chart-fig img, .slack-img').forEach((im) => {
 			im.addEventListener('click', () => openImg(im.getAttribute('src') || '', im.getAttribute('alt') || ''))
 		})
 		lb.addEventListener('click', close)
