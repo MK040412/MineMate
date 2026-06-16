@@ -43,7 +43,7 @@ const failures = [
 	<h1>Overview</h1>
 	<ul>
 		<li><b>MineMate</b> is a sub-project of <a href='https://mk040412.github.io/Project-Weasel/'>Project Weasel</a>: a study of <b>what phenomena emerge when multiple humans and LLM agents cooperate</b> — building, farming, and gathering together — in a shared, open-ended Minecraft world.</li>
-		<li>We study whether useful capability can <b>emerge</b> from many language-model agents acting in a shared world, and how a coordination framework plus a human-in-the-loop make that emergence reliable.</li>
+		<li>I study whether useful capability can <b>emerge</b> from many language-model agents acting in a shared world, and how a coordination framework plus a human-in-the-loop make that emergence reliable.</li>
 	</ul>
 
 	<h1>Why Minecraft?</h1>
@@ -114,7 +114,7 @@ const failures = [
 
 	<h1>Why the framework matters</h1>
 	<p>
-		Our contribution is the <b>coordination framework</b>. Remove it and the <i>same</i> model gets
+		My contribution is the <b>coordination framework</b>. Remove it and the <i>same</i> model gets
 		<b>stuck</b>: it talks instead of acting, loops on a sub-goal, or cannot recover from a missing
 		resource. The two farming attempts below fail exactly where the framework would have kept the team
 		unblocked — motivating why the structure is needed.
@@ -139,21 +139,11 @@ const failures = [
 	<figure class='fig-wide'>
 		<img loading='lazy' src={fig('design_space')} alt='MineMate design space' />
 		<figcaption>
-			<b>Design space.</b> We partition human–agent teaming along three axes:
+			<b>Design space.</b> I partition human–agent teaming along three axes:
 			<b>model communication</b> (coupled → decoupled → isolated → unstructured group
 			structures), <b>observability</b> (partial in-game vs. full in text), and
 			<b>user–model interaction</b> (direct, hierarchical, decentralized talking systems).
 			Each cell is measured for efficiency and interaction preference.
-		</figcaption>
-	</figure>
-
-	<figure class='chart-fig'>
-		<img loading='lazy' src={fig('marginal_utility')} alt='Task completion time vs. number of agents managed by one user' />
-		<figcaption>
-			<b>The coordination limit.</b> As a single user manages more agents, task-completion
-			time drops steeply at first but with <b>diminishing marginal utility</b> — each added
-			agent helps less, approaching a floor set by how many one person can actually coordinate.
-			<span class='muted'>(Illustrative; to be quantified in the planned study.)</span>
 		</figcaption>
 	</figure>
 
@@ -164,7 +154,7 @@ const failures = [
 			<video class='slack-vid' src={clip('slack_use')} controls preload='metadata' playsinline></video>
 		</div>
 		<p class='slack-text'>
-			We added a <b>Slack interface</b> so that <b>users can coordinate with one another</b>
+			I added a <b>Slack interface</b> so that <b>users can coordinate with one another</b>
 			easily — and command the agents — from <i>outside</i> the text-flooded in-game view.
 			Each agent gets its own avatar and sub-channel, so a team of people can divide work and
 			follow what every agent is doing in one place. <span class='muted'>Press ▶ on the clip to
@@ -340,29 +330,8 @@ const failures = [
 		font-size: 15px;
 		line-height: 1.6;
 	}
-	/* Centered chart figure (paper-style) */
-	.chart-fig {
-		max-width: 640px;
-		margin: 18px auto 8px;
-	}
-	.chart-fig img {
-		width: 100%;
-		height: auto;
-		display: block;
-		border-radius: 8px;
-		border: 1px solid var(--border);
-		background: #fff;
-	}
-	.chart-fig figcaption {
-		color: var(--muted);
-		font-size: 14px;
-		margin-top: 8px;
-		line-height: 1.5;
-		text-align: center;
-	}
-	/* Click the design-space / chart / Slack figure to enlarge */
-	.fig-wide img,
-	.chart-fig img {
+	/* Click the design-space / Slack figure to enlarge */
+	.fig-wide img {
 		cursor: zoom-in;
 		transition: transform 0.12s ease;
 	}
@@ -413,7 +382,7 @@ const failures = [
 		document.querySelectorAll('.clip video, .cmpcard video').forEach((v) => {
 			v.addEventListener('click', () => openVid(v.getAttribute('src') || ''))
 		})
-		document.querySelectorAll('.fig-wide img, .chart-fig img, .slack-img').forEach((im) => {
+		document.querySelectorAll('.fig-wide img, .slack-img').forEach((im) => {
 			im.addEventListener('click', () => openImg(im.getAttribute('src') || '', im.getAttribute('alt') || ''))
 		})
 		lb.addEventListener('click', close)
