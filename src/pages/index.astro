@@ -52,6 +52,27 @@ const failures = [
 		raw world the agents wake up into.
 	</p>
 
+	<h1>Partial observation matters</h1>
+	<p>
+		An embodied agent only ever sees its own <b>first-person view</b>. From that egocentric vantage
+		(left) it often <b>cannot tell how much it has actually accomplished</b>, or what is right beside
+		it. The <b>same moment in a third-person 3D view</b> (right) tells a different story — the agent
+		has in fact done a great deal of work. Because the agent is constrained to this <b>partial, 3D
+		first-person observation</b> of the world, it cannot always judge its own situation correctly: a
+		core difficulty of acting under <b>partial observability</b>.
+		<span class='muted'>Click either video to enlarge.</span>
+	</p>
+	<div class='compare'>
+		<figure class='cmpcard'>
+			<video src={clip('partial_observation')} autoplay loop muted playsinline preload='metadata'></video>
+			<figcaption>First-person view — all the agent actually sees.</figcaption>
+		</figure>
+		<figure class='cmpcard'>
+			<video src={clip('partial_observation_3d')} autoplay loop muted playsinline preload='metadata'></video>
+			<figcaption>Third-person 3D view — the work the agent really did.</figcaption>
+		</figure>
+	</div>
+
 	<h1>What the agents do well</h1>
 	<p>
 		Given a concrete sub-task, each agent performs reliably. The eight agents naturally <b>divide labor</b>
@@ -111,6 +132,10 @@ const failures = [
 		<a href='https://mk040412.github.io/'>Kang Minkyu</a>. Built on the mindcraft agent framework and
 		PaperMC, with inference served from Google Vertex AI.
 	</p>
+
+	<div id='lightbox' class='lightbox' role='dialog' aria-label='enlarged clip'>
+		<video id='lightbox-vid' loop muted playsinline controls></video>
+	</div>
 </Layout>
 
 <style>
@@ -140,4 +165,95 @@ const failures = [
 		max-width: 800px;
 		margin: 16px auto 8px;
 	}
+
+	/* Side-by-side comparison (first-person vs 3D view) */
+	.compare {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 16px;
+		margin: 16px 0 8px;
+	}
+	.cmpcard {
+		margin: 0;
+	}
+	.cmpcard video {
+		width: 100%;
+		height: auto;
+		display: block;
+		border-radius: 6px;
+		background: #000;
+	}
+	.cmpcard figcaption {
+		color: var(--muted);
+		font-size: 14px;
+		margin-top: 6px;
+		line-height: 1.4;
+		text-align: center;
+	}
+
+	/* Click any clip to enlarge */
+	.clip video,
+	.cmpcard video {
+		cursor: zoom-in;
+		transition: transform 0.12s ease;
+	}
+	.clip video:hover,
+	.cmpcard video:hover {
+		transform: scale(1.02);
+	}
+
+	/* Click-to-enlarge lightbox */
+	.lightbox {
+		position: fixed;
+		inset: 0;
+		background: rgba(10, 16, 28, 0.88);
+		display: none;
+		align-items: center;
+		justify-content: center;
+		z-index: 1000;
+		cursor: zoom-out;
+		padding: 24px;
+	}
+	.lightbox.open {
+		display: flex;
+	}
+	.lightbox video {
+		max-width: 92vw;
+		max-height: 92vh;
+		width: auto;
+		height: auto;
+		border-radius: 10px;
+		box-shadow: 0 10px 60px rgba(0, 0, 0, 0.6);
+	}
+
+	@media (max-width: 700px) {
+		.compare {
+			grid-template-columns: 1fr;
+		}
+	}
 </style>
+
+<script>
+	const lb = document.getElementById('lightbox')
+	const lbVid = document.getElementById('lightbox-vid') as HTMLVideoElement | null
+	if (lb && lbVid) {
+		const open = (src: string) => {
+			lbVid.setAttribute('src', src)
+			lb.classList.add('open')
+			const p = lbVid.play()
+			if (p && p.catch) p.catch(() => {})
+		}
+		const close = () => {
+			lb.classList.remove('open')
+			lbVid.pause()
+			lbVid.removeAttribute('src')
+		}
+		document.querySelectorAll('.clip video, .cmpcard video').forEach((v) => {
+			v.addEventListener('click', () => open(v.getAttribute('src') || ''))
+		})
+		lb.addEventListener('click', close)
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') close()
+		})
+	}
+</script>
