@@ -34,7 +34,7 @@ const failures = [
 <Layout
 	title='MineMate: Multi-Agent Emergent Capability with Humans'
 	pageTitle='MineMate'
-	description='Sub-project of Project Weasel — emergent multi-agent capability with humans in the loop, in the open-ended world of Minecraft.'
+	description='Sub-project of Project Weasel: emergent multi-agent capability with humans in the loop, in the open-ended world of Minecraft.'
 	authors={authors}
 	links={links}
 	heroVideo={clip('open_ended')}
@@ -43,7 +43,7 @@ const failures = [
 >
 	<h1>Overview</h1>
 	<ul>
-		<li><b>MineMate</b> is a sub-project of <a href='https://mk040412.github.io/Project-Weasel/'>Project Weasel</a>: a study of <b>what phenomena emerge when multiple humans and LLM agents cooperate</b> — building, farming, and gathering together — in a shared, open-ended Minecraft world.</li>
+		<li><b>MineMate</b> is a sub-project of <a href='https://mk040412.github.io/Project-Weasel/'>Project Weasel</a>: a study of <b>what phenomena emerge when multiple humans and LLM agents cooperate</b>, building, farming, and gathering together in a shared, open-ended Minecraft world.</li>
 		<li>I study whether useful capability can <b>emerge</b> from many language-model agents acting in a shared world, and how a coordination framework plus a human-in-the-loop make that emergence reliable.</li>
 	</ul>
 
@@ -51,7 +51,7 @@ const failures = [
 	<p>
 		Minecraft is an <b>open-ended, partially-observable sandbox</b>: there is no fixed objective, each
 		agent only sees its local surroundings, and goals must be discovered rather than scripted. That makes
-		it a strong testbed for <b>multi-agent emergence</b> — capability has to arise from the agents'
+		it a strong testbed for <b>multi-agent emergence</b>: capability has to arise from the agents'
 		interaction with the world and with each other, not from hand-written rules. The clip above is the
 		raw world the agents wake up into.
 	</p>
@@ -60,7 +60,7 @@ const failures = [
 	<p>
 		An embodied agent only ever sees its own <b>first-person view</b>. From that egocentric vantage
 		(left) it often <b>cannot tell how much it has actually accomplished</b>, or what is right beside
-		it. The <b>same moment in a third-person 3D view</b> (right) tells a different story — the agent
+		it. The <b>same moment in a third-person 3D view</b> (right) tells a different story: the agent
 		has in fact done a great deal of work. Because the agent is constrained to this <b>partial, 3D
 		first-person observation</b> of the world, it cannot always judge its own situation correctly: a
 		core difficulty of acting under <b>partial observability</b>.
@@ -69,18 +69,18 @@ const failures = [
 	<div class='compare'>
 		<figure class='cmpcard'>
 			<video src={clip('partial_observation')} loop muted playsinline preload='none'></video>
-			<figcaption>First-person view — all the agent actually sees.</figcaption>
+			<figcaption>First-person view: all the agent actually sees.</figcaption>
 		</figure>
 		<figure class='cmpcard'>
 			<video src={clip('partial_observation_3d')} loop muted playsinline preload='none'></video>
-			<figcaption>Third-person 3D view — the work the agent really did.</figcaption>
+			<figcaption>Third-person 3D view: the work the agent really did.</figcaption>
 		</figure>
 	</div>
 
 	<h1>What the agents do well</h1>
 	<p>
 		Given a concrete sub-task, each agent performs reliably. The eight agents naturally <b>divide labor</b>
-		— logging, mining, and crafting tools — and run those jobs in parallel without colliding.
+		(logging, mining, and crafting tools) and run those jobs in parallel without colliding.
 	</p>
 	<div class='clip-grid'>
 		{works.map((c) => (
@@ -93,13 +93,13 @@ const failures = [
 
 	<h1>Agents coordinate to share resources</h1>
 	<p>
-		Capability is not just per-agent — it is <b>social</b>. Agents communicate over shared channels to
+		Capability is not just per-agent. It is <b>social</b>. Agents communicate over shared channels to
 		request and hand off items. Here an agent needs a crafting table; it asks <b>Nova</b>, and Nova
 		brings one over. The exchange emerges from their dialogue, not from a hard-coded trade.
 	</p>
 	<figure class='clip clip-wide'>
 		<video src={clip('nova_communication')} loop muted playsinline preload='none'></video>
-		<figcaption>An agent asks Nova for a crafting table — and Nova delivers it.</figcaption>
+		<figcaption>An agent asks Nova for a crafting table, and Nova delivers it.</figcaption>
 	</figure>
 
 	<h1>Humans and agents team up</h1>
@@ -118,7 +118,7 @@ const failures = [
 		My contribution is the <b>coordination framework</b>. Remove it and the <i>same</i> model gets
 		<b>stuck</b>: it talks instead of acting, loops on a sub-goal, or cannot recover from a missing
 		resource. The two farming attempts below fail exactly where the framework would have kept the team
-		unblocked — motivating why the structure is needed.
+		unblocked, motivating why the structure is needed.
 	</p>
 	<div class='clip-grid'>
 		{failures.map((c) => (
@@ -133,8 +133,8 @@ const failures = [
 	<h1>Design space</h1>
 	<p>
 		Beyond the demos, MineMate is studied as an <b>HCI problem</b>: how one human
-		coordinates with <i>many</i> agents at once. Single-agent capability is already strong —
-		the hard part is <b>teaming</b>. <span class='muted'>Click the figure to enlarge.</span>
+		coordinates with <i>many</i> agents at once. Single-agent capability is already strong.
+		The hard part is <b>teaming</b>. <span class='muted'>Click the figure to enlarge.</span>
 	</p>
 
 	<figure class='fig-wide'>
@@ -156,7 +156,7 @@ const failures = [
 		</div>
 		<p class='slack-text'>
 			I added a <b>Slack interface</b> so that <b>users can coordinate with one another</b>
-			easily — and command the agents — from <i>outside</i> the text-flooded in-game view.
+			easily (and command the agents) from <i>outside</i> the text-flooded in-game view.
 			Each agent gets its own avatar and sub-channel, so a team of people can divide work and
 			follow what every agent is doing in one place. <span class='muted'>Press ▶ on the clip to
 			watch a short walkthrough.</span>
@@ -199,6 +199,7 @@ const failures = [
 		font-size: 14px;
 		margin-top: 6px;
 		line-height: 1.4;
+		text-align: center;
 	}
 	.clip-wide {
 		max-width: 800px;
@@ -413,7 +414,7 @@ const failures = [
 		)
 		vids.forEach((v) => io.observe(v))
 	} else {
-		// Fallback: no IntersectionObserver — just autoplay everything.
+		// Fallback: no IntersectionObserver, just autoplay everything.
 		vids.forEach((v) => {
 			const el = v as HTMLVideoElement
 			el.preload = 'auto'
