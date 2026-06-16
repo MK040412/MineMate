@@ -17,15 +17,6 @@ const clip = (name) => `${base}/clips/${name}.mp4`
 // Paper figures (exported from the design/architecture drawings).
 const fig = (name) => `${base}/figures/${name}.png`
 
-// System / design figures shown at the back of the page, with very short captions.
-const sysFigures = [
-	{ f: 'slack', l: 'Slack bridge: the in-game screen floods with text, so human↔agent dialogue moves to Slack — outside the game view.' },
-	{ f: 'grouping', l: 'Task groups: agents split into groups (Miner, Farming…); a human can own a group, dividing work across people and agents.' },
-	{ f: 'dynamics', l: 'Free communication: agents are not bound to fixed pairs — any agent talks to any other (many-to-many), forming plans dynamically.' },
-	{ f: 'observability', l: 'Observability: in-game observation is partial; the text channel is full — yet a model does not reliably know its own state.' },
-	{ f: 'update_loop', l: 'Per-agent loop: timestamped Memory → Reflection (insights) → reusable Skills.' },
-]
-
 // Scenario groups, ordered as a story: what works → coordination →
 // human-in-the-loop → and why the framework is needed (failure cases).
 const works = [
@@ -138,12 +129,11 @@ const failures = [
 	</div>
 
 	<hr />
-	<h1>Design space &amp; system</h1>
+	<h1>Design space</h1>
 	<p>
 		Beyond the demos, MineMate is studied as an <b>HCI problem</b>: how one human
 		coordinates with <i>many</i> agents at once. Single-agent capability is already strong —
-		the hard part is <b>teaming</b>. Below is the design space we explore and the system
-		pieces that make many-agent control workable. <span class='muted'>Click any figure to enlarge.</span>
+		the hard part is <b>teaming</b>. <span class='muted'>Click the figure to enlarge.</span>
 	</p>
 
 	<figure class='fig-wide'>
@@ -157,26 +147,20 @@ const failures = [
 		</figcaption>
 	</figure>
 
-	<div class='figgrid'>
-		{sysFigures.map((g) => (
-			<figure class='figcard'>
-				<img loading='lazy' src={fig(g.f)} alt={g.l} />
-				<figcaption>{g.l}</figcaption>
-			</figure>
-		))}
+	<h1>Coordinating through Slack</h1>
+	<div class='slack-block'>
+		<div class='slack-media'>
+			<img class='slack-img' loading='lazy' src={fig('slack')} alt='Slack interface for MineMate' />
+			<video class='slack-vid' src={clip('slack_use')} controls preload='metadata' playsinline></video>
+		</div>
+		<p class='slack-text'>
+			We added a <b>Slack interface</b> so that <b>users can coordinate with one another</b>
+			easily — and command the agents — from <i>outside</i> the text-flooded in-game view.
+			Each agent gets its own avatar and sub-channel, so a team of people can divide work and
+			follow what every agent is doing in one place. <span class='muted'>Press ▶ on the clip to
+			watch a short walkthrough.</span>
+		</p>
 	</div>
-
-	<h1>Experiment design</h1>
-	<p>
-		We run a controlled study over a <b>20 × 5 grid</b>. <b>Phase 1 — team composition:</b>
-		humans <i>H</i> ∈ {'{'}1, 2, 4, 8{'}'} crossed with agents <i>A</i> ∈ {'{'}1, 2, 4, 8, 16{'}'},
-		measuring the marginal value of adding an agent vs. a human across scales.
-		<b>Phase 2 — spatial role assignment:</b> humans and agents are placed in a bounded
-		<b>House</b> (indoor, repetitive subtasks) or an unbounded <b>Wild</b> (open exploration),
-		plus a composite <b>Village</b>. The hypothesis: <i>VLM agents excel at bounded, repetitive
-		tasks but degrade in open-ended exploration</i> — so role-aligning agents to bounded work
-		should help most. Metrics: task-completion time, throughput, and human workload.
-	</p>
 
 	<hr />
 	<h1>Acknowledgement</h1>
@@ -305,43 +289,63 @@ const failures = [
 		margin-top: 8px;
 		line-height: 1.5;
 	}
-	.figgrid {
+	/* Slack interface block: media (png + click-to-play video) on the left,
+	   text on the right; media height-capped so the tall portrait assets
+	   don't make the section overly tall. */
+	.slack-block {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-		gap: 16px;
+		grid-template-columns: auto 1fr;
+		gap: 22px;
+		align-items: center;
 		margin: 16px 0 8px;
-		align-items: start;
 	}
-	.figcard {
-		margin: 0;
+	.slack-media {
+		display: flex;
+		gap: 12px;
+		align-items: flex-start;
 	}
-	.figcard img {
-		width: 100%;
-		height: auto;
+	.slack-media .slack-img,
+	.slack-media .slack-vid {
+		height: 340px;
+		width: auto;
+		max-width: 100%;
 		display: block;
 		border-radius: 8px;
 		border: 1px solid var(--border);
+		background: #000;
+	}
+	.slack-media .slack-img {
 		background: #fff;
-	}
-	.figcard figcaption {
-		color: var(--muted);
-		font-size: 13px;
-		margin-top: 6px;
-		line-height: 1.4;
-	}
-	/* Click any figure to enlarge */
-	.fig-wide img,
-	.figcard img {
 		cursor: zoom-in;
 		transition: transform 0.12s ease;
 	}
-	.figcard img:hover {
+	.slack-media .slack-img:hover {
 		transform: scale(1.02);
+	}
+	.slack-media .slack-vid {
+		cursor: pointer;
+	}
+	.slack-text {
+		color: var(--muted);
+		font-size: 15px;
+		line-height: 1.6;
+	}
+	/* Click the design-space / Slack figure to enlarge */
+	.fig-wide img {
+		cursor: zoom-in;
+		transition: transform 0.12s ease;
 	}
 
 	@media (max-width: 700px) {
 		.compare {
 			grid-template-columns: 1fr;
+		}
+		.slack-block {
+			grid-template-columns: 1fr;
+		}
+		.slack-media .slack-img,
+		.slack-media .slack-vid {
+			height: 260px;
 		}
 	}
 </style>
@@ -378,7 +382,7 @@ const failures = [
 		document.querySelectorAll('.clip video, .cmpcard video').forEach((v) => {
 			v.addEventListener('click', () => openVid(v.getAttribute('src') || ''))
 		})
-		document.querySelectorAll('.fig-wide img, .figcard img').forEach((im) => {
+		document.querySelectorAll('.fig-wide img, .slack-img').forEach((im) => {
 			im.addEventListener('click', () => openImg(im.getAttribute('src') || '', im.getAttribute('alt') || ''))
 		})
 		lb.addEventListener('click', close)
