@@ -161,11 +161,17 @@ const failures = [
 	<figure class='fig-wide'>
 		<img loading='lazy' src={fig('design_space')} alt='MineMate design space' />
 		<figcaption>
-			<b>Design space.</b> I partition human–agent teaming along three axes:
-			<b>model communication</b> (coupled → decoupled → isolated → unstructured group
-			structures), <b>observability</b> (partial in-game vs. full in text), and
-			<b>user–model interaction</b> (direct, hierarchical, decentralized talking systems).
-			Each cell is measured for efficiency and interaction preference.
+			<b>Design space.</b> I study human–agent teaming along three axes.
+			<b>Model communication</b> (top) — how much structure the agents' talk has, left to right:
+			<i>coupled</i> (one group shares a plan and acts as a unit), <i>decoupled</i> (groups exchange
+			only summaries through a representative), <i>isolated</i> (groups never talk across boundaries,
+			so only the user bridges them), and <i>non-structured</i> (any agent may talk to any other).
+			<b>Observation</b> (bottom-left) — the partial, in-game first-person view (eye / crossed-eye mark
+			who can and cannot see an event) vs. the full picture in text.
+			<b>Interaction</b> (bottom-right) — how the user drives the team, left to right: <i>direct</i>
+			(address each agent individually), <i>centralized</i> (speak to one coordinator that relays to a
+			fixed group), and <i>hierarchical centralized</i> (that coordinator further delegates down a chain).
+			The main experiment below uses the <i>decoupled</i> + <i>centralized</i> cell.
 		</figcaption>
 	</figure>
 
