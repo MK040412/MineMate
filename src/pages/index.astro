@@ -166,11 +166,16 @@ const failures = [
 	<hr />
 	<h1>Results: capability scales, but with diminishing returns</h1>
 	<p>
-		In a small main experiment, four people each directed a Minecraft team while I swept the
-		<b>Human:Agent ratio</b> from <b>1:1 to 1:16</b> (a fresh world per run), measuring how much
-		each team produced on two subtasks: <b>gathering logs</b> and <b>crafting a stone pickaxe</b>.
-		More agents help, but with <b>diminishing marginal returns</b>, and how fast the benefit runs
-		out depends on the task. <span class='muted'>Click the figure to enlarge.</span>
+		In a small main experiment, <b>four participants</b> each ran a <b>~5-hour</b> session: after
+		choosing their preferred design-space configuration during free play, they directed a team of
+		agents (driven by <b>Gemma</b> and <b>Kimi&nbsp;2.5</b> in parallel) while I swept the
+		<b>Human:Agent ratio</b> from <b>1:1 to 1:16</b>, with a fresh world per run and each
+		<b>25&nbsp;min</b> run split into <b>15&nbsp;min gathering logs</b> then <b>10&nbsp;min crafting a
+		stone pickaxe</b>. Notably, the people <b>mostly did not play directly</b>: they told agents what
+		to do and spent their time <b>managing bottlenecks</b>, unblocking stuck agents and re-allocating
+		work, so the human's role looked more like a coordinator than a player. More agents help, but
+		with <b>diminishing marginal returns</b>, and how fast the benefit runs out depends on the task.
+		<span class='muted'>Click the figure to enlarge.</span>
 	</p>
 	<figure class='fig-wide'>
 		<img loading='lazy' src={fig('resource_scaling')} alt='Resource yield vs. Human:Agent ratio for logs and stone pickaxe' />
