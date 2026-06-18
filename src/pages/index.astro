@@ -164,6 +164,43 @@ const failures = [
 	</div>
 
 	<hr />
+	<h1>Results: capability scales, but with diminishing returns</h1>
+	<p>
+		In a small main experiment, four people each directed a Minecraft team while I swept the
+		<b>Human:Agent ratio</b> from <b>1:1 to 1:16</b> (a fresh world per run), measuring how much
+		each team produced on two subtasks: <b>gathering logs</b> and <b>crafting a stone pickaxe</b>.
+		More agents help, but with <b>diminishing marginal returns</b>, and how fast the benefit runs
+		out depends on the task. <span class='muted'>Click the figure to enlarge.</span>
+	</p>
+	<figure class='fig-wide'>
+		<img loading='lazy' src={fig('resource_scaling')} alt='Resource yield vs. Human:Agent ratio for logs and stone pickaxe' />
+		<figcaption>
+			<b>Diminishing returns from more agents.</b> Yield versus team size for the two subtasks.
+			<b>Log gathering</b> is abundant and embarrassingly parallel, so it keeps climbing across the
+			whole sweep. The <b>stone pickaxe</b>, a multi-step <i>collaborative</i> recipe, saturates
+			almost immediately (flat past 1:4), because its bottleneck is inter-agent coordination,
+			exactly where the agents are weakest. Capability grows with the agent count only as far as a
+			task <b>decomposes into independent, parallel work</b>.
+		</figcaption>
+	</figure>
+
+	<hr />
+	<h1>Conclusion</h1>
+	<ul>
+		<li>Embodied LLM agents are <b>strong as singletons but weak at collaboration</b>: each agent
+			follows free-form instructions well, yet the work breaks down at the <b>seams</b> between
+			agents.</li>
+		<li>Adding agents follows a <b>law of diminishing marginal utility</b>, and the benefit
+			disappears as soon as a task needs agents to cooperate rather than run in parallel.</li>
+		<li>Given a free choice, users settle on a <b>middle band of agency</b>: small <i>decoupled</i>
+			groups that share only what they need and never carry two roles, watched through <b>text</b>
+			(Slack) rather than the in-world view.</li>
+		<li>As agents move into the physical world, the central HCI problem is <b>keeping a person in
+			control of a team of emergent, only-partially-legible teammates</b>, which is what
+			<b>MineMate</b> is built to study.</li>
+	</ul>
+
+	<hr />
 	<h1>Acknowledgement</h1>
 	<p>
 		Thank you to the UNIST Minecraft Community, my high-school friends, my UNIST
